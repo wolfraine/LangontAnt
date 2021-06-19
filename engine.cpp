@@ -2,45 +2,13 @@
 #include <iostream>
 /*
 */
-int engine::check_neighbors(int height, int width)
-{
-	int neighbor = 0;
-
-	if (main_tab[height - 1][width + 1].state == 1) {
-		neighbor += 1;
-	}
-	if (main_tab[height][width + 1].state == 1) {
-		neighbor += 1;
-	}
-	if (main_tab[height + 1][width + 1].state == 1) {
-		neighbor += 1;
-	}
-	if (main_tab[height - 1][width].state == 1) {
-		neighbor += 1;
-	}
-	if (main_tab[height + 1][width].state == 1) {
-		neighbor += 1;
-	}
-	if (main_tab[height - 1][width - 1].state == 1) {
-		neighbor += 1;
-	}
-	if (main_tab[height][width - 1].state == 1) {
-		neighbor += 1;
-	}
-	if (main_tab[height + 1][width - 1].state == 1) {
-		neighbor += 1;
-	}
-	return neighbor;
-}
 
 engine::engine()
 {
 	main_tab = new cell * [height];
-	tmp_tab = new cell * [height];
 	for (int i = 0; i < height; i++)
 	{
 		main_tab[i] = new cell[width];
-		tmp_tab[i] = new cell[width];
 	}
 }
 
@@ -53,57 +21,10 @@ engine::engine(int ww, int hh)
 	height = hh;
 	width = ww;
 	main_tab = new cell * [height];
-	tmp_tab = new cell * [height];
 	for (int i = 0; i < height; i++)
 	{
 		main_tab[i] = new cell[width];
-		tmp_tab[i] = new cell[width];
 	}
-}
-
-void engine::analyze()
-{
-
-	int hh = height - 1;
-	int ww = width - 1;
-	for (int i = 1; i < hh; i++)
-	{
-		for (int j = 1; j < ww; j++)
-		{
-			int neighbor = 0;
-			neighbor = check_neighbors(i, j);
-			if (main_tab[i][j].state == 1) {
-				if (neighbor == 2 || neighbor == 3) {
-					tmp_tab[i][j].state = 1;
-				}
-				else if (neighbor < 2 || neighbor >= 4) {
-					tmp_tab[i][j].state = 0;
-				}
-
-			}
-			else if (main_tab[i][j].state == 0) {
-				if (neighbor == 3) {
-					tmp_tab[i][j].state = 1;
-				}
-			}
-		}
-	}
-	for (int t = 0; t < height; t++)
-	{
-		for (int k = 0; k < width; k++)
-		{
-			main_tab[t][k].state = tmp_tab[t][k].state;
-		}
-	}
-}
-
-void engine::init()
-{
-	tmp_tab[1][2].state = 1;
-	tmp_tab[2][3].state = 1;
-	tmp_tab[3][1].state = 1;
-	tmp_tab[3][2].state = 1;
-	tmp_tab[3][3].state = 1;
 }
 
 void engine::draw_tab()
@@ -122,18 +43,76 @@ void engine::draw_tab()
 	}
 }
 
+void engine::change_state(int x, int y)
+{
+	if (main_tab[x][y].state == false) {
+		main_tab[x][y].state = true;
+	}
+	else {
+		main_tab[x][y].state = false;
+	}
+}
 
 engine::~engine()
 {
-	if (main_tab || tmp_tab)
+	if (main_tab)
 	{
 		for (int i = 0; i < height; i++)
 		{
 			delete[] main_tab[i];
-			delete[] tmp_tab[i];
 		}
 		delete main_tab;
-		delete tmp_tab;
 	}
 }
+
+void engine::analyze(int x, int y)
+{
+	if (main_tab[x][y].state == false) {
+		if (direction == 1)
+			direction = 4;
+		//turns right to face left
+		else if (direction == 2)
+			direction = 3;
+		//turns right to face up
+		else if (direction == 3)
+			direction = 1;
+		//turns right to face down
+		else if (direction == 4)
+			direction = 2;
+	}
+	else
+	{
+		//turns left to face left
+		if (direction == 1)
+			direction = 3;
+		//turns left to face right
+		else if (direction == 2)
+			direction = 4;
+		//turns left to face down
+		else if (direction == 3)
+			direction = 2;
+		//turns left to face up
+		else if (direction == 4)
+			direction = 1;
+	}
+	change_state(x, y);
+	//if facing up, move up 1
+	if (direction == 1)
+		posX = x - 1;
+	//if facing down, move down 1
+	if (direction == 2)
+		posX = x + 1;
+	//if facing left, move left 1
+	if (direction == 3)
+		posY = y + 1;
+	//if facing right, move right 1
+	if (direction == 4)
+		posY = y - 1;
+}
+
+void engine::init(int posX, int posY)
+{
+	main_tab[posX][posY].state = false;
+}
+
 

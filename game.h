@@ -6,7 +6,6 @@
 class game : public engine
 {
 private:
-	//engine started_game;
 
 public:
 	//konstruktor bezparametorwy
