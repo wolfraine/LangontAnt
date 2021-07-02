@@ -34,7 +34,10 @@ void engine::draw_tab()
 	{
 		for (int j = 0; j < width; j++)
 		{
-			if (main_tab[i][j].state == true)
+			if (i == posX && j == posY) {
+				std::cout << " A ";
+			}
+			else if (main_tab[i][j].state == true)
 				std::cout << " x ";
 			else
 				std::cout << " - ";
@@ -108,11 +111,36 @@ void engine::analyze(int x, int y)
 	//if facing right, move right 1
 	if (direction == 4)
 		posY = y - 1;
+
+	if (posX == 0 || posY == 0 || posX == height || posY == width)
+	{
+	if (direction == 1)
+	{
+		posX += 2;
+		direction = 2;
+	}
+	else if (direction == 2)
+	{
+		posX -= 2;
+		direction = 1;
+	}
+	else if (direction == 3)
+	{
+		posY -= 2;
+		direction = 4;
+	}
+	else if (direction == 4)
+	{
+		posY += 2;
+		direction = 3;
+	}
+	}
 }
 
-void engine::init(int posX, int posY)
+void engine::init(int x, int y)
 {
-	main_tab[posX][posY].state = false;
+	posX = height / 2;
+	posY = width / 2;
 }
 
 

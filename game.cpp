@@ -21,24 +21,25 @@ game::~game()
 
 void game::play()
 {
-	init(posX, posY);
+	init(height, width);
 	//pêtla automatyczna
-	//while (true)
-	//{
-	//	draw_tab();
-	//	analyze(posX, posY);
-	//	Sleep(800);
-	//}
-
-	//krok z enterem
-	char sign ;
-	sign = getchar();
-	while (sign == '\n')
+	
+	while (true)
 	{
 		draw_tab();
 		analyze(posX, posY);
-		sign = getchar();
+		Sleep(200);
 	}
+
+	//krok z enterem
+	//char sign ;
+	//sign = getchar();
+	//while (sign == '\n')
+	//{
+	//	draw_tab();
+	//	analyze(posX, posY);
+	//	sign = getchar();
+	//}
 }
 
 void game::view()

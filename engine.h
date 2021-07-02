@@ -6,13 +6,15 @@
 class engine
 {
 private:
-	//funkcja sprawdza czy jest s¹siad
-	//void moveAnt(int posX, int posY);
+	//zmiana stanu
+	void change_state(int x, int y);
 protected:
+	//ustawienie mrówki na œrodku tablicy
+	void init(int x, int y);
 	// w i k do poprawy kompilacja od wersji 2011
 	//posX i Y œrodek planszy
-	int posX = 10;
-	int posY = 10;
+	int posX = 0;
+	int posY = 0;
 	//kierunek  1->prawo 2->lewo 3->góra 4->dó³
 	int direction = 1;
 	//liczba kolumn
@@ -34,12 +36,9 @@ public:
 	virtual ~engine();
 	//analiza stanu
 	void analyze(int x, int y);
-	//ustawienie mrówki na œrodku tablicy
-	void init(int posX, int posY);
 	//rysowanie tabelki
 	void draw_tab();
 	//virtual void view() = 0;
-	void change_state(int x, int y);
 };
 #endif
 
