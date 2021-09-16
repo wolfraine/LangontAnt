@@ -22,8 +22,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{7096c73f-0a49-453c-8fe0-7919d2341afe}</ProjectGuid>
-    <RootNamespace>JZOSykułaŁmrówkaLangtona</RootNamespace>
+    <RootNamespace>LangtonAnt</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>LangtonAnt_v2</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -142,14 +143,12 @@
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="JZO_SykułaŁ_mrówkaLangtona.cpp" />
-    <ClCompile Include="tekst.cpp" />
+    <ClCompile Include="LangontAnt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="tekst.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
