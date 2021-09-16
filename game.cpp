@@ -22,13 +22,12 @@ game::~game()
 void game::play()
 {
 	init(height, width);
-	//pêtla automatyczna
 	
 	while (true)
 	{
 		draw_tab();
 		analyze(posX, posY);
-		Sleep(200);
+		Sleep(300);
 	}
 
 	//krok z enterem
